@@ -1,4 +1,4 @@
-exports.validateProduct = (req, res, next) => {
+exports.validateSong = (req, res, next) => {
     const data = req.body;
     if(
     (data.hasOwnProperty('title') && typeof(data.title) === 'string') &&

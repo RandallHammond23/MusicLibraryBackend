@@ -1,5 +1,6 @@
 const express = require('express');
 const repoContext = require('./repository/repository-wrapper');
+const { validateSong } = require('./middleware/songs-validation');
 
 
 const app = express();
@@ -23,17 +24,16 @@ app.get('/api/songs/:id', (req, res) => {
     return res.send(songs);
    });
 
-   app.post('/api/songs', (req, res) => {
+   app.post('/api/songs', [validateSong],  (req, res) => {
     const newSong = req.body;
     const addedSong = repoContext.songs.createSong(newSong);
     return res.send(addedSong);
    });
    
-   app.put('/api/songs/:id', (req, res) => {
+   app.put('/api/songs/:id', [validateSong], (req, res) => {
     const id = req.params.id;
     const songPropertiesToUpdate = req.body;
     const updatedSong = repoContext.songs.updateSong(id, songPropertiesToUpdate);
     return res.send(updatedSong)
    });
 
-   
