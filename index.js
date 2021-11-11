@@ -23,5 +23,9 @@ app.get('/api/songs/:id', (req, res) => {
     return res.send(songs);
    });
 
-   
+   app.post('/api/songs', (req, res) => {
+    const newSong = req.body;
+    const addedSong = repoContext.songs.createSong(newSong);
+    return res.send(addedSong);
+   });
    
